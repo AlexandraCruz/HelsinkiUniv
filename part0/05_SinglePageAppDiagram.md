@@ -1,25 +1,16 @@
+# Part 0, 0.5 Single Page App Diagram
+
 ```mermaid
-classDiagram
-    class User
-    class Browser
-    class Server
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Server
 
-    User "Write note and click Save" --> Browser
-    Browser --> Server: HTTP POST /new_note
-    Server --> Browser: HTTP 302 Redirect to /notes
-    Browser --> Server: HTTP GET /notes
-    Server --> Browser: HTTP GET /notes
-    Browser --> Server: HTTP GET /main.css
-    Server --> Browser: HTTP GET /main.css
-    Browser --> Server: HTTP GET /main.js
-    Server --> Browser: HTTP GET /main.js
-    Browser --> Server: HTTP GET /data.json
-    Server --> Browser: HTTP GET /data.json
+    User->>Browser: Write note and click Save
+    Browser->>Server: HTTP POST /new_note
+    Server-->>Browser: HTTP 201 Created
+    Note right of Server: Server processes POST request
+    Note right of Server: Server creates new note object
+    Note right of Server: Server updates in-memory data store
 
-
-
-
-    Server --> Server: Server processes POST request
-    Server --> Server: Server creates new note object
-    Server --> Server: Server adds note to notes array
-    Server --> Server: Notes are not saved to database
+    Browser->>Browser: Update UI with new note
