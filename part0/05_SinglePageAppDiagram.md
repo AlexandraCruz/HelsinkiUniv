@@ -1,21 +1,25 @@
-graph TD
+```mermaid
+classDiagram
+    class User
+    class Browser
+    class Server
 
-A[Initial Page Load] -->|Fetch HTML, JS, CSS| B[Server]
-B -->|Respond with files| C[Browser]
-C -->|Execute spa.js| D[Fetch Notes as JSON]
-D -->|Render Notes with DOM| E[User Sees Notes]
+    User "Write note and click Save" --> Browser
+    Browser --> Server: HTTP POST /new_note
+    Server --> Browser: HTTP 302 Redirect to /notes
+    Browser --> Server: HTTP GET /notes
+    Server --> Browser: HTTP GET /notes
+    Browser --> Server: HTTP GET /main.css
+    Server --> Browser: HTTP GET /main.css
+    Browser --> Server: HTTP GET /main.js
+    Server --> Browser: HTTP GET /main.js
+    Browser --> Server: HTTP GET /data.json
+    Server --> Browser: HTTP GET /data.json
 
-subgraph User Interaction
-    E -->|Enter Note| F[Form Input]
-    F -->|Click Add Note| G[JavaScript Intercepts]
-    G -->|Prevent Default Submission| H[Create New Note Object]
-    H -->|Add to Local Array| I[Render Note Locally]
-    I -->|Display Note| J[User Sees New Note]
-end
 
-G -->|Send Note to Server| K[HTTP POST to /new_note_spa]
-K -->|Send JSON Data| L[Server]
-L -->|Add Note to Server-Side Array| M[Respond 201 Created]
 
-M -->|No Redirect| N[Stay on Same Page]
-N -->|Enhance UX| J
+
+    Server --> Server: Server processes POST request
+    Server --> Server: Server creates new note object
+    Server --> Server: Server adds note to notes array
+    Server --> Server: Notes are not saved to database
