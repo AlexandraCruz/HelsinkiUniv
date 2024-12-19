@@ -1,6 +1,4 @@
-# HelsinkiUniv
-
-Advanced Modern Web App update 2025
+# Part 0, 0.4 New Note Diagram
 
 ```mermaid
 sequenceDiagram
