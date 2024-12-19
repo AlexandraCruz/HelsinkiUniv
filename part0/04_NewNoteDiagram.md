@@ -2,8 +2,6 @@
 
 Advanced Modern Web App update 2025
 
-Helsinki
-
 ```mermaid
 sequenceDiagram
     participant User
