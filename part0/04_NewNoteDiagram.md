@@ -10,10 +10,9 @@ sequenceDiagram
     Browser->>Server: HTTP POST /new_note
     Server-->>Browser: HTTP 302 Redirect to /notes
     Browser->>Server: HTTP GET /notes
-    Browser->>Server: HTTP GET /main.css
-    Browser->>Server: HTTP GET /main.js
-    Browser->>Server: HTTP GET /data.json
+    Server-->>Browser: HTML page with list of notes
+
     Note right of Server: Server processes POST request
     Note right of Server: Server creates new note object
-    Note right of Server: Server adds note to notes array
-    Note right of Server: Notes are not saved to database
+    Note right of Server: Server adds note to database
+    Note right of Server: Server renders HTML page with updated note list
